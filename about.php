@@ -1,4 +1,4 @@
-<?php include "inc\header.php"; ?>
+<?php include "inc/header.php"; ?>
 <div class="section" id="content">
 	<h2>About!</h2>
 	<p class="centered">E-Blog is my attempt at creating a basic blogging application.<br />

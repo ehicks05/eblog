@@ -1,1 +1,1 @@
-			<div class="section" id="footer"> <!-- begin footer -->				<address id="siteaddress">					&copy; 2012 Eric Hicks				</address>			</div> <!-- end footer -->		</div> <!-- end container -->	</body></html>
+			<div class="section" id="footer"> <!-- begin footer -->				<address id="siteaddress">					&copy; 2012 Eric Hicks				</address>			</div> <!-- end footer -->		</div> <!-- end container -->	</body></html><?phpob_end_flush( );?>

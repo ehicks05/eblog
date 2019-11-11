@@ -1,4 +1,4 @@
-<?php include "inc\header.php"; ?>
+<?php include "inc/header.php"; ?>
 <?php session_start(); ?>
 <div class="section" id="content">
 	<h2>Create Post!</h2>
@@ -25,7 +25,7 @@
 			$title = $_POST["title"];
 			$content = $_POST["post_content"];
 			$public = $_POST["public"];
-			$date = date(YmdHis);
+			$date = date('YmdHis');
 			
 			if(empty($title) || empty($content)) {
 				die("<p class=\"centered\">One or more fields were left blank</p>");
@@ -38,12 +38,12 @@
 				$public = 0;
 			}
 
-			include "inc\db_connect.php";
+			include "inc/db_connect.php";
 			
 			$query = "insert into posts set userid=\"$userid\", title=\"$title\", content=\"$content\", timeposted=\"$date\", public=\"$public\"";
-			$result = mysql_query($query) or die ("<p class=\"centered\">Error in query: </p>");
+			$result = mysqli_query($link, $query) or die ("<p class=\"centered\">Error in query: </p>");
 			
-			include "inc\db_disconnect.php";
+			include "inc/db_disconnect.php";
 			
 			echo "<p class=\"centered\">Post Created...</p>";		
 		}

@@ -1,6 +1,6 @@
 <?php
 // free result set memory
-mysql_free_result($result);
+//mysqli_free_result($result);
 // close connection
-mysql_close($link);
+mysqli_close($link);
 ?>

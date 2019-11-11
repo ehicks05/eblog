@@ -4,15 +4,15 @@
 	<?php
 	if (isset($_SESSION['name'])) {
 		unset($name);
-		include "inc\db_connect.php";
+		include "inc/db_connect.php";
 		
 		$query = "select users.name, posts.title, posts.content, posts.timeposted from users, posts where posts.public=1 and posts.userid = users.userid";
-		$result = mysql_query($query) or die ('Error in query: ');
+		$result = mysqli_query($link, $query) or die ('Error in query: ');
 		
 		// Printing results in HTML
 		echo "<table><caption>All Public Posts:</caption>\n";
 		echo "\t<tr><td>Name:</td><td>Title:</td><td>Content:</td><td>Timestamp:</td></tr>\n";
-		while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
+		while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 			echo "\t<tr>\n";
 			foreach ($line as $col_value) {
 				echo "\t\t<td>$col_value</td>\n";
@@ -21,7 +21,7 @@
 		}
 		echo "</table>\n";
 		
-		include "inc\db_disconnect.php";
+		include "inc/db_disconnect.php";
 	}
 	else {
 		echo "<p class=\"centered\">Log in to view postings. We hope you enjoy your stay.

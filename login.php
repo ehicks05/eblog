@@ -1,4 +1,4 @@
-<?php include "inc\header.php"; ?>
+<?php include "inc/header.php"; ?>
 <?php session_start(); ?>
 <div class="section" id="content">
 	<h2>Log In!</h2>
@@ -18,18 +18,18 @@
 			";
 		}
 		elseif(!isset($_SESSION["name"])) {
-			$name = $_POST['name']; 
+			$name = $_POST['name'];
 			$password = $_POST['password']; 
 			//die if any fields were left blank
 			if(empty($name) || empty($password)) {
 				die("<p class=\"centered\">One or more fields were left blank</p>");
 			}
-			include "inc\db_connect.php";
+			include "inc/db_connect.php";
 			
 			$query = "select * from users where name=\"$name\" and password=\"$password\"";
-			$result = mysql_query($query) or die ('Error in query: ');
+			$result = mysqli_query($link, $query) or die ('Error in query: ');
 			
-			if(mysql_num_rows($result) != 1) {
+			if(mysqli_num_rows($result) != 1) {
 				die ("<p class=\"centered\">No matches with that name and password.</p>");
 			}
 			else {
@@ -38,15 +38,15 @@
 			}
 			
 			$query = "select userid from users where name=\"$name\"";
-			$result = mysql_query($query) or die ('Error in query: ');
-			$row = mysql_fetch_array($result, MYSQL_ASSOC);
+			$result = mysqli_query($link, $query) or die ('Error in query: ');
+			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 			$userid = $row['userid'];
 			
 			$_SESSION['userid'] = $userid;
 			
-			include "inc\db_disconnect.php";
-			
-			header("Refresh: 0; url=login.php");		
+			include "inc/db_disconnect.php";
+
+			header("Refresh: 0; url=login.php");
 		}
 		else {
 			echo "<p class=\"centered\">Thank you for logging in!</p>";

@@ -1,16 +1,16 @@
-<?php include "inc\header.php"; ?>
+<?php include "inc/header.php"; ?>
 <?php session_start(); ?>
 <div class="section" id="content"> <!-- body -->
 	<h2>Your Account!</h2>
 	<?php
 	if(empty($_POST['search_name']) && empty($_POST['public'])) {
     $userid = $_SESSION['userid'];
-    include "inc\db_connect.php";
+    include "inc/db_connect.php";
     $query = "select public from users where userid=\"$userid\"";
-		$result = mysql_query($query) or die ("<p class=\"centered\">Error in query: </p>");
+		$result = mysqli_query($link, $query) or die ("<p class=\"centered\">Error in query: </p>");
     // Print results in HTML
     echo "<table>\n";
-    while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
+    while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
       echo "\t<tr>\n";
       
       foreach ($line as $col_value) {
@@ -46,19 +46,19 @@
 	}
 	elseif (!empty($_POST['search_name'])) {
 		$name = $_POST['search_name'];
-		include "inc\db_connect.php";
+		include "inc/db_connect.php";
 		
 		$query = "select name from users where name like \"$name%\" and public=1";
-		$result = mysql_query($query) or die ("<p class=\"centered\">Error in query: </p>");
+		$result = mysqli_query($link, $query) or die ("<p class=\"centered\">Error in query: </p>");
 		
-		if(mysql_num_rows($result) == 0) {
+		if(mysqli_num_rows($result) == 0) {
 			die ("<p class=\"centered\">No users found with that name.</p>");
 		}
 		else {
 			// Print results in HTML
 			$i = 1;
 			echo "<table>\n";
-			while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
+			while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 				echo "\t<tr>\n";
 				
 				foreach ($line as $col_value) {
@@ -75,12 +75,12 @@
 			}
 			echo "</table>\n";
 		}
-		include "inc\db_disconnect.php";
+		include "inc/db_disconnect.php";
 	}
 	elseif (isset($_POST['public'])) {
 		$public = $_POST['public'];
 		$userid = $_SESSION['userid'];
-		include "inc\db_connect.php";
+		include "inc/db_connect.php";
 		
 		if ($public === "Public") {
 			$public = 1;
@@ -90,7 +90,7 @@
 		}
 		
 		$query = "update users set public=\"$public\" where userid=\"$userid\"";
-		$result = mysql_query($query) or die ("<p class=\"centered\">Error in query: </p>");
+		$result = mysqli_query($link, $query) or die ("<p class=\"centered\">Error in query: </p>");
 		
 		
 		if(!$result) {
@@ -100,7 +100,7 @@
 			echo "<p class=\"centered\">Account successfully changed!</p>";
 		}
 
-		include "inc\db_disconnect.php";
+		include "inc/db_disconnect.php";
     header("Refresh: 1; url=your_account.php");
 	}
 	?>

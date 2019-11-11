@@ -1,5 +1,5 @@
-<?php include "inc\header.php"; 
-	include "inc\check_email.php";
+<?php include "inc/header.php"; 
+	include "inc/check_email.php";
 ?>
 <?php session_start(); ?>
 <div class="section" id="content"> <!-- body -->
@@ -31,20 +31,20 @@
 			die("<p class=\"centered\">One or more fields were left blank</p>");
 		}
 		
-		include "inc\db_connect.php";
+		include "inc/db_connect.php";
 		
 		$query = "select * from users where name=\"$name\" or email=\"$email\"";
-		$result = mysql_query($query) or die ('Error in query: ');
+		$result = mysqli_query($link, $query) or die ('Error in query: ');
 		
-		if (mysql_num_rows($result) > 0) {
+		if (mysqli_num_rows($result) > 0) {
 			die ("<p class=\"centered\">User with the same name or email already exists.</p>");
 		}
 		else {
 			echo "<p class=\"centered\">Information Accepted</p><br />";
 		}
 		$query = "insert into users set name=\"$name\", password=\"$password\", email=\"$email\", public=0";
-		$result = mysql_query($query) or die ("<p class=\"centered\">Error in query: </p>");
-		include "inc\db_disconnect.php";
+		$result = mysqli_query($link, $query) or die ("<p class=\"centered\">Error in query: </p>");
+		include "inc/db_disconnect.php";
 		
 		echo "<p class=\"centered\">Account Creation Successful!</p>";
 	}

@@ -1,4 +1,4 @@
-<?php include "inc\header.php"; ?>
+<?php include "inc/header.php"; ?>
 <div class="section" id="content">
 	<h2>Logging Out!</h2>
 	<?php
