@@ -41,7 +41,7 @@
 			include "inc/db_connect.php";
 			
 			$query = "insert into posts set userid=\"$userid\", title=\"$title\", content=\"$content\", timeposted=\"$date\", public=\"$public\"";
-			$result = mysqli_query($link, $query) or die ("<p class=\"centered\">Error in query: </p>");
+			$result = mysqli_query($link, $query) or die (mysqli_error($link));
 			
 			include "inc/db_disconnect.php";
 			

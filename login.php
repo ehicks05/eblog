@@ -27,7 +27,7 @@
 			include "inc/db_connect.php";
 			
 			$query = "select * from users where name=\"$name\" and password=\"$password\"";
-			$result = mysqli_query($link, $query) or die ('Error in query: ');
+			$result = mysqli_query($link, $query) or die (mysqli_error($link));
 			
 			if(mysqli_num_rows($result) != 1) {
 				die ("<p class=\"centered\">No matches with that name and password.</p>");
@@ -38,7 +38,7 @@
 			}
 			
 			$query = "select userid from users where name=\"$name\"";
-			$result = mysqli_query($link, $query) or die ('Error in query: ');
+			$result = mysqli_query($link, $query) or die (mysqli_error($link));
 			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 			$userid = $row['userid'];
 			

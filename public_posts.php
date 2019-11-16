@@ -8,13 +8,13 @@
 		include "inc/db_connect.php";
 		//find out user id
 		$query = "SELECT users.userid FROM users WHERE users.name = \"$name\"";
-		$result = mysqli_query($link, $query) or die ('Error in query: ');
+		$result = mysqli_query($link, $query) or die (mysqli_error($link));
 		$line = mysqli_fetch_object($result);
 		$userid = $line->userid;
 
 		//get posts by that user
 		$query = "SELECT title, content FROM posts WHERE posts.userid=\"$userid\" AND posts.public = 1";
-		$result = mysqli_query($link, $query) or die ('Error in query: ');
+		$result = mysqli_query($link, $query) or die (mysqli_error($link));
 		
 		echo "<p class=\"centered\">Posts by $name:</p>";
 		echo "<table>\n";

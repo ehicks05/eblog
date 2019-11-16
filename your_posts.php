@@ -9,7 +9,7 @@
 		include "inc/db_connect.php";
 		
 		$query = "select title, content, timeposted, public from posts where userid=\"$userid\"";
-		$result = mysqli_query($link, $query) or die ("<p class=\"centered\">Error in query: </p>");
+		$result = mysqli_query($link, $query) or die (mysqli_error($link));
 		
 		// Printing results in HTML
 		echo "<table>\n";

@@ -7,7 +7,7 @@
     $userid = $_SESSION['userid'];
     include "inc/db_connect.php";
     $query = "select public from users where userid=\"$userid\"";
-		$result = mysqli_query($link, $query) or die ("<p class=\"centered\">Error in query: </p>");
+		$result = mysqli_query($link, $query) or die (mysqli_error($link));
     // Print results in HTML
     echo "<table>\n";
     while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -49,7 +49,7 @@
 		include "inc/db_connect.php";
 		
 		$query = "select name from users where name like \"$name%\" and public=1";
-		$result = mysqli_query($link, $query) or die ("<p class=\"centered\">Error in query: </p>");
+		$result = mysqli_query($link, $query) or die (mysqli_error($link));
 		
 		if(mysqli_num_rows($result) == 0) {
 			die ("<p class=\"centered\">No users found with that name.</p>");
@@ -90,7 +90,7 @@
 		}
 		
 		$query = "update users set public=\"$public\" where userid=\"$userid\"";
-		$result = mysqli_query($link, $query) or die ("<p class=\"centered\">Error in query: </p>");
+		$result = mysqli_query($link, $query) or die (mysqli_error($link));
 		
 		
 		if(!$result) {
