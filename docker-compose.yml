@@ -6,7 +6,7 @@ services:
       dockerfile: .docker/Dockerfile
     image: php-docker
     ports:
-      - 8084:80
+      - 8085:80
     volumes:
       - .:/srv/app
     links:
